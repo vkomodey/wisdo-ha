@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: 'wisdo_db'
+    ports:
+      - "27018:27017"
+    volumes:
+      - wisdo_mongo_data:/data/db
+volumes:
+  wisdo_mongo_data:
