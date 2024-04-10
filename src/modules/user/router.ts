@@ -4,7 +4,7 @@ import controller from "./controller";
 export const router = Router();
 
 router.post('/', async (req: Request, res: Response) => {
-  const user = await controller.createUser(req);
+  const result = await controller.createUser(req);
 
-  res.status(200).json(user);
+  res.status(200).json(result);
 });

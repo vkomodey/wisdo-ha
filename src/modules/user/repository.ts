@@ -1,4 +1,4 @@
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 import {IUser} from "./model";
 import UserModel from "./model";
 import {UserEntity} from "./entity";
@@ -8,7 +8,7 @@ class UserRepository {
     this.model = model;
   }
 
-  async findById(id: string | ObjectId): Promise<UserEntity | null> {
+  async findById(id: string): Promise<UserEntity | null> {
     const user = await this.model.findById(id);
 
     if (!user) {

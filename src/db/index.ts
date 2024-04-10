@@ -11,7 +11,7 @@ async function connectDb() {
     console.log('MongoDB is not connected', err);
   }
 
-  console.log(`MongoDB is successfuly connected to the ${config.mongoHost}:${config.mongoPort}`);
+  console.log(`MongoDB has been successfuly connected to the ${config.mongoHost}:${config.mongoPort}`);
 }
 
 const db = connectDb();
