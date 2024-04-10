@@ -13,6 +13,7 @@ export interface IPost {
   likes: number,
   status: PostStatus,
   score: number,
+  scoreUpdatedAt: Date,
 }
 
 const postSchema = new Schema<IPost>({
@@ -27,6 +28,7 @@ const postSchema = new Schema<IPost>({
   likes: {type: Number, required: true, default: 0},
   status: {type: String, default: PostStatus.PENDING_APPROVAL, enum: Object.values(PostStatus), required: true},
   score: {type: Number, default: 0, index: true},
+  scoreUpdatedAt: {type: Date, default: Date.now, index: true},
 }, {timestamps: true});
 
 const PostModel = model<IPost>('Post', postSchema);
