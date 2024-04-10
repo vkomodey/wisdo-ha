@@ -2,15 +2,16 @@ import mongoose from "mongoose";
 
 import config from "../config";
 
-function connectDb() {
+async function connectDb() {
   const connectionString = `mongodb://${config.mongoHost}:${config.mongoPort}/${config.mongoDbName}`;
 
-  const odm = mongoose.createConnection(connectionString);
+  try {
+    await mongoose.connect(connectionString);
+  } catch(err) {
+    console.log('MongoDB is not connected', err);
+  }
 
-  odm.on("connected", () => console.log('MongoDB Connected'));
-  odm.on("error", (err) => console.log("MongoDB Connection Error", err));
-
-  return odm;
+  console.log(`MongoDB is successfuly connected to the ${config.mongoHost}:${config.mongoPort}`);
 }
 
 const db = connectDb();
