@@ -1,25 +1,15 @@
 import { Request } from 'express';
-import logger from '../../utils/logger';
-import mongoose from 'mongoose';
-import User from './model';
+import userRepository from './repository';
+import {UserEntity} from './entity';
 
 class Controller {
+  private repository = userRepository;
   async createUser(req: Request) {
-    const body = req.body;
-    const user = new User({
-      name: body.name,
-      email: body.email,
-      role: 'regular',
-      communities: [new mongoose.Types.ObjectId('4edd40c86762e0fb12000003')],
-      image: body.image,
-      country: body.country
-    });
+    const user = new UserEntity(req.body);
 
-    logger.info('Request is here');
+    const id = await this.repository.create(user);
 
-    await user.save();
-
-    return user.toJSON();
+    return {id};
   }
 }
 
