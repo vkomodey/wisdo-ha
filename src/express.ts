@@ -6,6 +6,7 @@ import {router as postRouter} from './modules/post/router';
 import {router as communityRouter} from './modules/community/router';
 
 import authMiddleware from './middlewares/authenticate.middleware';
+import updateScore from './jobs/score.job';
 
 export function setupApp(app: express.Application) {
   app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
@@ -16,6 +17,8 @@ export function setupApp(app: express.Application) {
   router.use('/user', userRouter);
   router.use('/post', postRouter);
   router.use('/community', communityRouter);
+  // test run. should use cron instead
+  updateScore().then(() => console.log('Jobs score has been updated'));
 
   app.use(router);
 }
